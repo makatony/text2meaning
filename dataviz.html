@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>Text2Meaning</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript">
+
+
+
+function dump(obj) {
+    out = '';
+    for (var i in obj) {
+		if (typeof obj[i] === 'object') line = JSON.stringify(obj[i]);
+		else line = obj[i];
+        out += i + ": " + JSON.stringify(obj[i]) + "<br>";
+    }
+	return out;
+}
+
+function loadJsonDB(isin) {
+  $.ajax({
+    url: isin+'.json', 
+	dataType: 'json',
+    success: function(data) {
+		loadedJson = data;
+		console.log("success poll: "+isin);
+		updateMemory(loadedJson);
+		updateIsinList(loadedJson);
+		//console.log(data);
+    },
+    complete: function() {
+      // Schedule the next request when the current one's complete
+    },
+	error: function (e) {
+		$("#errors").append(dump(e));
+	}
+  });
+};
+
+
+function pollAll() {
+	for (i = 0, len = isinArray.length; i < len; i++) { 
+		console.log("polling "+isinArray[i]);
+		loadJsonDB(isinArray[i]);
+	}
+	if (polling == true) setTimeout(pollAll, 2000);
+};
+
+function loadJsonTwitter() {
+  $.ajax({
+    url: 'twitter.json', 
+	dataType: 'json',
+    success: function(data) {
+		loadedJson = data;
+		console.log("success poll twitter");
+		
+		if (data.title == lastTwitterTitle) {}
+		else {
+			resetPopupTwitter();
+			$("#popuptabletwitter").append(
+				$('<tr>').append(
+					$('<td>',{ "text": data.title })).append(
+					$('<td>',{ "text": data.author })).append(	
+			));
+			$("#twitter").dialog("open");
+			lastTwitterTitle = data.title;
+		}
+    },
+    complete: function() {
+      // Schedule the next request when the current one's complete
+    },
+	error: function (e) {
+		$("#errors").append(dump(e));
+	}
+  });
+};
+
+
+
+function pollTwitter() {
+	for (i = 0, len = isinArray.length; i < len; i++) {
+		loadJsonTwitter(isinArray[i]);
+	}
+	if (twitterpolling == true) setTimeout(pollTwitter, 2000);
+};
+
+
+
+function updateIsinList(data) { // GUI update
+		
+		console.log(data.isin +" "+data.articles.length);
+		setScore(data.isin,data.aggregatedScore+" " + "("+data.scoreConfidence+")");
+		setNewsCounter(data.isin,data.articles.length);
+		setName(data.isin,data.name);
+
+}
+
+	function setNewsCounter(isin,counter) {
+		$("#content").find("tr#"+isin+" td:nth-child(4)").text(counter);
+	}
+	function setScore(isin,score) {
+		$("#content").find("tr#"+isin+" td:nth-child(3)").text(score);
+	}
+	function setName(isin,name) {
+		$("#content").find("tr#"+isin+" td:nth-child(2)").text(name);
+	}
+
+function showDetails(isin) {
+	resetPopup();
+	var isinData = getIsinData(isin);
+
+	var articleArray = isinData.articles;
+	
+	for (i = 0, len = articleArray.length; i < len; i++) {
+		var thisArticle = articleArray[i];
+		$("#popuptable").append(
+			$('<tr>').append(
+				$('<td>',{ "text": thisArticle.title })).append(
+				$('<td>',{ "text": thisArticle.score })).append(
+				$('<td>',{ "text": thisArticle.scoreConfidence }))	
+		)
+	}
+	
+	$("#popup").dialog("open");
+	
+	
+}
+	
+
+function getIsinData(isin) {
+	for (i = 0, len = masterIsinJsonArray.length; i < len; i++) {
+		var thisObject = masterIsinJsonArray[i];
+		if (thisObject.isin == isin) { 
+			return thisObject;
+		}
+	}
+	return "error";
+}
+	
+function updateMemory(data) {
+	updated = false;
+	for (i = 0, len = masterIsinJsonArray.length; i < len; i++) {
+		var thisObject = masterIsinJsonArray[i];
+		console.log("check "+thisObject.isin +" "+ data.isin);
+		if (thisObject.isin == data.isin) { 
+			masterIsinJsonArray[i] = data;
+			console.log("updated in memory "+data.isin); 
+			updated = true;
+		}
+	}
+	if (updated == false) {
+		console.log("new memory entry for "+data.isin)
+		masterIsinJsonArray.push(data);
+	}
+}
+	
+	
+	
+function resetPopup() {
+	$("#popup").html(
+		$('<table>',{ "border": 1, "id": "popuptable" }).append(
+			$('<tr>').append(
+				$('<th>',{ "text": "title" })).append(
+				$('<th>',{ "text": "score" })).append(
+				$('<th>',{ "text": "ScoreConfidence" }))
+		)
+	);
+}
+	
+function resetPopupTwitter() {
+	$("#twitter").html(
+		$('<table>',{ "border": 1, "id": "popuptabletwitter" }).append(
+			$('<tr>').append(
+				$('<th>',{ "text": "title" })).append(
+				$('<th>',{ "text": "author" }))
+		)
+	);
+}
+	
+
+
+$( document ).ready(function() {
+	lastTwitterTitle = ""
+	polling = true;
+	loadedJson = {};
+	isinArray = ["all","US0378331005","CH0012005267","US8552441094"];
+	masterIsinJsonArray = [];
+	//classify("This is a text to try language detection.");
+	//batch_classify(["A Romanian court on Wednesday placed the head of the nation’s electoral monitor in pretrial detention for 30 days on suspicion of influence peddling and money laundering, local media reported. Officials from Romania’s National Anti-Corruption Directorate (DNA) detained and questioned Ana Maria Patru, the chairwoman of the nation’s Permanent Electoral Authority (AEP), on Tuesday following searches of AEP offices and her home. In 2009, while Patru was serving as AEP vice president, she allegedly received a bribe of €210,000 (US$ 308,900) from an IT company that her agency eventually hired to produce the software used to monitor election results, according to DNA officials. The money was then allegedly laundered through several companies including one controlled by her husband. Patru’s husband was caught on Tuesday while trying to flee their home with evidence, Balkan Insight reported. Patru has reportedly resigned from her post."]);
+
+$("#content").append(
+	$('<table>',{ "border": 1 }).append(
+		$('<tr>').append(
+			$('<th>',{ "text": "ISIN" })).append(
+			$('<th>',{ "text": "Name" })).append(
+			$('<th>',{ "text": "Score" })).append(
+			$('<th>',{ "text": "Anzahl News" }))
+	).append(
+		$('<tr>',{ "id": "US0378331005" }).append(
+			$('<td>').append($("<a>", { "href": "#", "text": "US0378331005"} ).click(function() { showDetails("US0378331005"); }))).append(
+			$('<td>',{ "text": "--" })).append(
+			$('<td>',{ "text": "--" })).append(
+			$('<td>',{ "text": "3" }))	
+	).append(
+		$('<tr>',{ "id": "US8552441094" }).append(
+			$('<td>').append($("<a>", { "href": "#", "text": "US8552441094"} ).click(function() { showDetails("US8552441094"); }))).append(
+			$('<td>',{ "text": "--" })).append(
+			$('<td>',{ "text": "--" })).append(
+			$('<td>',{ "text": "1" }))	
+	).append(
+		$('<tr>',{ "id": "CH0012005267" }).append(
+			$('<td>').append($("<a>", { "href": "#", "text": "CH0012005267"} ).click(function() { showDetails("CH0012005267"); }))).append(
+			$('<td>',{ "text": "--" })).append(
+			$('<td>',{ "text": "--" })).append(
+			$('<td>',{ "text": "1" }))	
+	).append(
+		$('<tr>',{ "id": "all" }).append(
+			$('<td>').append($("<a>", { "href": "#", "text": "all"} ).click(function() { showDetails("all"); }))).append(
+			$('<td>',{ "text": "--" })).append(
+			$('<td>',{ "text": "--" })).append(
+			$('<td>',{ "text": "1" }))	
+	)
+);
+
+resetPopup();
+
+
+$("a#stoppoll").click(function() {
+	polling = false;
+});
+	
+$("a#startpoll").click(function() {
+	polling = true;
+	pollAll();
+});
+$("a#stoppollt").click(function() {
+	twitterpolling = false;
+});
+	
+$("a#startpollt").click(function() {
+	twitterpolling = true;
+	pollTwitter();
+});
+
+
+	
+	$("#popup").dialog(
+	{
+	width: 700,
+	modal: true
+	}
+	);
+	$("#popup").dialog("close");
+	
+	$("#twitter").dialog(
+	{
+	width: 400,
+	modal: true
+	}
+	);
+	$("#twitter").dialog("close");
+	
+
+	
+	//$("#content").append($("#content").find("tr#CH2132431243 td:nth-child(3)").text());
+	//$("#content").append($("#content").find("tr#CH2132431243 td:nth-child(4)").text());
+
+	
+
+	
+	
+});
+
+</script>
+
+</head>
+
+<body>
+<div id="content">
+</div>
+<a href="#" id="stoppoll">stop polling</a> |
+<a href="#" id="startpoll">start polling</a>
+<br>
+<a href="#" id="stoppollt">stop polling twitter</a> |
+<a href="#" id="startpollt">start polling twitter</a>
+
+<div id="popup">
+</div>
+<div id="twitter">
+</div>
+<div id="errors">
+</div>
+</body>
+</html>
+
+
+
+

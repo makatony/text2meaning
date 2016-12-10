@@ -1,0 +1,98 @@
+{
+"isin": "all",
+"aggregatedScore": "negative",
+"name": "all",
+"scoreConfidence": "0.222",
+"articles": [
+  {
+    "id": "1b276e4abb267cbc8ded6a68e8066976",
+    "title": "Nokia, Teva Pharmaceutical and Vodafone Are Volatile; Here\u0027s Why",
+    "url": "http://us.rd.yahoo.com/finance/external/tsmfe/rss/SIG\u003d13gbvr1o6/*https://www.thestreet.com/story/13897442/1/nokia-teva-pharmaceutical-and-vodafone-are-volatile-here-s-why.html?puc\u003dyahoo\u0026cm_ven\u003dYAHOO",
+    "publishedDate": "Nov 17, 2016 6:40:00 PM",
+    "summary": "",
+    "author": "",
+	"score": "Negative-all",
+	"scoreConfidence": "0.1"
+  },
+  {
+    "id": "66adb39c4e47b5b000433491ffed1433",
+    "title": "[$$] Vodafone: voice of reason",
+    "url": "http://us.rd.yahoo.com/finance/external/ft/rss/SIG\u003d1298qgj1b/*http://www.ft.com/cms/s/8978f490-ab35-11e6-9cb3-bb8207902122,s01\u003d1.html?ftcamp\u003dtraffic/partner/feed_headline/us_yahoo/auddev",
+    "publishedDate": "Nov 15, 2016 3:41:27 PM",
+    "summary": "[at Financial Times] - Vodafone\u0027s speech-mark logo looks so last century, the ultimate symbol of old school verbal conversation. The modern mobile operator is instead focused on flogging data, with users channelling floods of ...",
+    "author": ""
+  },
+  {
+    "id": "d49cc2592cbdc2f2eebad53e72f6a6c1",
+    "title": "Stock Futures Hold Gains as Retail Sales Climb Faster Than Expected",
+    "url": "http://us.rd.yahoo.com/finance/external/tsmfe/rss/SIG\u003d13c6v526o/*https://www.thestreet.com/story/13892197/1/stock-futures-inch-higher-as-dow-gains-for-seventh-session.html?puc\u003dyahoo\u0026cm_ven\u003dYAHOO",
+    "publishedDate": "Nov 15, 2016 2:43:00 PM",
+    "summary": "",
+    "author": ""
+  },
+  {
+    "id": "d37f20184dfc31c5338ffb204bb9d9f6",
+    "title": "Half Year 2016 Vodafone Group PLC Earnings Release - Before Market Open",
+    "url": "http://us.rd.yahoo.com/finance/news/rss/story/*http://biz.yahoo.com/research/earncal/20161115.html?t\u003dvod",
+    "publishedDate": "Nov 15, 2016 1:07:02 PM",
+    "summary": "",
+    "author": ""
+  },
+  {
+    "id": "2f3394b812f0c0ff9538874863f90748",
+    "title": "Vodafone takes $5 billion charge against new price war in India",
+    "url": "http://us.rd.yahoo.com/finance/news/rss/story/*http://finance.yahoo.com/news/vodafone-beats-forecasts-4-3-073258691.html",
+    "publishedDate": "Nov 15, 2016 12:27:07 PM",
+    "summary": "",
+    "author": ""
+  },
+  {
+    "id": "2d677f6c540657975e06332fef902430",
+    "title": "Vodafone Takes India Writedown, but Organic Earnings Beat Estimates",
+    "url": "http://us.rd.yahoo.com/finance/external/tsmfe/rss/SIG\u003d138j21dl8/*https://www.thestreet.com/story/13892894/1/vodafone-takes-india-writedown-reports-first-half-loss.html?puc\u003dyahoo\u0026cm_ven\u003dYAHOO",
+    "publishedDate": "Nov 15, 2016 9:12:00 AM",
+    "summary": "",
+    "author": ""
+  },
+  {
+    "id": "6900a36ea9dd6ccc127537414956fd79",
+    "title": "Global telecom market needs to consolidate: Northstream C...",
+    "url": "http://us.rd.yahoo.com/finance/news/rss/story/*http://finance.yahoo.com/video/global-telecom-market-needs-consolidate-061700581.html",
+    "publishedDate": "Nov 15, 2016 7:17:00 AM",
+    "summary": "",
+    "author": ""
+  },
+  {
+    "id": "9151015baa7fac64adbba2cb41005307",
+    "title": "Look for evidence of Brexit impact on Vodafone: Northstre...",
+    "url": "http://us.rd.yahoo.com/finance/news/rss/story/*http://finance.yahoo.com/video/look-evidence-brexit-impact-vodafone-061600641.html",
+    "publishedDate": "Nov 15, 2016 7:16:00 AM",
+    "summary": "",
+    "author": ""
+  },
+  {
+    "id": "5a2b47bc081142e8e99d0fa454c0c0a7",
+    "title": "[$$] Vodafone seeks probe of BT\u0027s copper broadband plans",
+    "url": "http://us.rd.yahoo.com/finance/external/ft/rss/SIG\u003d1290jhbiv/*http://www.ft.com/cms/s/c744d224-aa79-11e6-9cb3-bb8207902122,s01\u003d1.html?ftcamp\u003dtraffic/partner/feed_headline/us_yahoo/auddev",
+    "publishedDate": "Nov 14, 2016 6:22:34 PM",
+    "summary": "[at Financial Times] - Vodafone has moved to derail BT\u0027s plans to roll out a faster broadband service using existing copper lines, arguing that its rival\u0027s technology trials have broken strict rules set by Ofcom, the telecoms ...",
+    "author": ""
+  },
+  {
+    "id": "f615112ad491b5d8035c241ecfffaaa0",
+    "title": "ConAgra, Tenet Healthcare Tumble Into Thursday’s 52-Week Low Club",
+    "url": "http://us.rd.yahoo.com/finance/external/x247wallst/rss/SIG\u003d13dfpn5bm/*http://247wallst.com/investing/2016/11/10/con-agra-tenet-healthcare-tumble-into-thursdays-52-week-low-club/",
+    "publishedDate": "Nov 10, 2016 10:04:11 PM",
+    "summary": "",
+    "author": ""
+  },
+  {
+    "id": "5db679d51dcb32d34eb395be1ed9faf4",
+    "title": "Here Is Why These Are the 2 Best Telecom Stocks to Buy Right Now",
+    "url": "http://us.rd.yahoo.com/finance/external/tsmfe/rss/SIG\u003d13ict5uor/*https://www.thestreet.com/story/13885772/1/here-is-why-these-are-the-2-best-telecom-stocks-to-buy-right-now.html?puc\u003dyahoo\u0026cm_ven\u003dYAHOO",
+    "publishedDate": "Nov 9, 2016 3:28:00 PM",
+    "summary": "[at TheStreet] - These telecommunications giants offer great dividend yields and profit potential, at a discount to their share prices.",
+    "author": ""
+  }
+]
+}
